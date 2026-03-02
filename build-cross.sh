@@ -331,7 +331,7 @@ rm $prefix_dir/bin/gsl*
 usetlsrctarball=1
 if [[ $usetlsrctarball -eq 1 ]]
 then
-    [ -d texlive-$tlversion-source ] || $wget https://mirrors.ctan.org/systems/texlive/Source/texlive-$tlversion-source.tar.xz
+    [ -d texlive-$tlversion-source ] || $wget https://ctan.org/tex-archive/systems/texlive/Source/texlive-$tlversion-source.tar.xz #https://mirrors.ctan.org/systems/texlive/Source/texlive-$tlversion-source.tar.xz
     tar xf texlive-$tlversion-source.tar.xz
     cd texlive-$tlversion-source
 else
