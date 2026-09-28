@@ -322,10 +322,24 @@ cd src
 gsl_ver=2.8
 [ -d gsl-$gsl_ver ] || $wget https://ftpmirror.gnu.org/gsl/gsl-$gsl_ver.tar.gz
 tar xf gsl-$gsl_ver.tar.gz
-cd gsl-$gsl_ver
+pushd gsl-$gsl_ver
 ./configure $commonflags 
 gnumakeplusinstall
 rm $prefix_dir/bin/gsl*
+popd
+
+# build ghostscript
+ghostscript_ver=10.08.0
+gs_ver_nodot="${ghostscript_ver//./}"
+[ -d ghostscript-$ghostscript_ver ] || $wget https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs$gs_ver_nodot/ghostscript-$ghostscript_ver.tar.xz
+tar xf ghostscript-$ghostscript_ver.tar.xz
+pushd ghostscript-$ghostscript_ver
+rm -rf libpng tiff zlib brotli jpeg
+./configure $commonflags --without-tesseract
+gnumakeplusinstall
+make so -j $(nproc)
+make soinstall
+popd
 
 # texlive
 usetlsrctarball=1
