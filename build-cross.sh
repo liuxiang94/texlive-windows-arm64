@@ -354,6 +354,8 @@ else
     git checkout $tlcommithash
 fi
 
+# TL27 can use system jpeg instead of the rename 
+sed -i 's/\bjpeg_read_icc_profile\b/jpeg_read_icc_profile2/g' texk/xdvipsk/graphlib/loadJPEG.cpp
 
 sed -i 's|\./himktables\$(EXEEXT)|#\./himktables\$(EXEEXT)|' texk/web2c/Makefile.in 
 sed -i 's|"texlua"|"texluajit"|'  texk/texlive/windows_mingw_wrapper/runscript_dll.c
